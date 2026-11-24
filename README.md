@@ -9,9 +9,6 @@
 
 <p align="center">
   <a href="#english">English</a> · <a href="#zh-hant">繁體中文</a>
-  &nbsp;&nbsp;
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0e0f10" alt="MIT" align="center"></a>
-  <img src="https://img.shields.io/badge/node-%E2%89%A520-0e0f10" alt="Node 20+" align="center">
 </p>
 
 <a name="english"></a>
