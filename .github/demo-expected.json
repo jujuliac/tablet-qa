@@ -1,5 +1,10 @@
 {
   "_note": "Expected sweep findings for examples/demo-site (before site), per width: 'check selector'. Generated from a macOS Chrome run.",
+  "fontDependent": [
+    "shortLastLine",
+    "lineJump"
+  ],
+  "_fontDependentNote": "Line-break checks depend on the fonts installed on the machine. Extra findings of these kinds are printed as notes, not failures.",
   "sweep": {
     "743": [
       "clipped body > main > div.promo > span.tag:nth-of-type(1)",

@@ -63,7 +63,11 @@ if (home) {
     const got = new Set(r.findings.map((f) => `${f.check} ${f.selector}`));
     const want = new Set(expected.sweep[w] || []);
     for (const x of want) if (!got.has(x)) errors.push(`width ${w}: missing  ${x}`);
-    for (const x of got) if (!want.has(x)) errors.push(`width ${w}: extra    ${x}`);
+    for (const x of got) {
+      if (want.has(x)) continue;
+      if ((expected.fontDependent || []).includes(x.split(" ")[0])) console.log(`note: width ${w}: font-dependent finding ${x}`);
+      else errors.push(`width ${w}: extra    ${x}`);
+    }
   }
   for (const w of Object.keys(expected.sweep)) if (!seen.has(w)) errors.push(`width ${w}: not measured`);
 }
