@@ -1,0 +1,13 @@
+{
+  "name": "tablet-qa",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node scripts/test/compare.test.mjs && node scripts/test/imgdiff.test.mjs && node scripts/test/runmeta.test.mjs && node scripts/test/stop-hook.test.mjs && node scripts/test/browser-pool.test.mjs && node scripts/test/config.test.mjs && node scripts/test/compare-text.test.mjs",
+    "test:browser": "node scripts/test/measure.test.mjs",
+    "test:all": "npm test && npm run test:browser"
+  }
+}

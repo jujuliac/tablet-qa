@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="version" content="demo-before">
+<title>Demo Store</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif; color: #222; background: #f6f4ef; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: #fff; border-bottom: 1px solid #e5e1d8; }
+  header strong { font-size: 20px; }
+  .search { width: 32px; height: 32px; border: 1px solid #bbb; border-radius: 50%; background: #fff; }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .hero { background: #2f5d50; color: #fff; border-radius: 16px; padding: 48px 32px; }
+  .hero h1 { margin: 0 0 8px; font-size: 32px; }
+  .hero p { margin: 0; opacity: .85; }
+  .cards { display: grid; gap: 20px; margin-top: 32px; grid-template-columns: 1fr; }
+  @media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card { background: #fff; border-radius: 12px; overflow: hidden; }
+  .card .img { aspect-ratio: 4 / 3; background: linear-gradient(135deg, #d9cbb0, #a7b8a8); }
+  .card .body { padding: 16px; }
+  .card h2 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0 0 12px; color: #666; font-size: 14px; }
+  .card button { min-height: 44px; padding: 0 16px; border: 1px solid #2f5d50; border-radius: 8px; background: #fff; color: #2f5d50; font-size: 15px; }
+</style>
+</head>
+<body>
+<header><strong>Demo Store</strong><button class="search" aria-label="Search"></button></header>
+<main>
+  <section class="hero"><h1>New for Autumn</h1><p>A demo page for tablet-qa. Not a real store.</p></section>
+  <section class="cards" aria-label="Products">
+    <article class="card"><div class="img"></div><div class="body"><h2>Wooden Tray</h2><p>Hand-finished, made for cups and mugs.</p><button>View details</button></div></article>
+    <article class="card"><div class="img"></div><div class="body"><h2>Linen Tablecloth</h2><p>Machine washable, in four colors.</p><button>View details</button></div></article>
+    <article class="card"><div class="img"></div><div class="body"><h2>Ceramic Vase</h2><p>Matte glaze, 20 cm tall.</p><button>View details</button></div></article>
+  </section>
+</main>
+</body>
+</html>

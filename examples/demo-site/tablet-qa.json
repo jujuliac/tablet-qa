@@ -1,0 +1,58 @@
+{
+  "sites": {
+    "before": {
+      "url": "http://localhost:4810/before",
+      "label": "demo page, single column"
+    },
+    "after": {
+      "url": "http://localhost:4810/after",
+      "label": "demo page, three columns"
+    }
+  },
+  "profiles": {
+    "ipad102-portrait": {
+      "width": 810,
+      "height": 1080,
+      "touch": true
+    },
+    "air-portrait": {
+      "width": 820,
+      "height": 1180,
+      "touch": true
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "touch": false
+    }
+  },
+  "breakpoints": [
+    744,
+    1024
+  ],
+  "pages": [
+    {
+      "id": "home",
+      "path": "/"
+    }
+  ],
+  "cases": [
+    {
+      "id": "card-grid",
+      "path": "/",
+      "profiles": [
+        "ipad102-portrait",
+        "air-portrait"
+      ],
+      "expect": "On tablets the product cards sit three across, not one full-width column",
+      "capture": {
+        "mode": "element",
+        "target": {
+          "css": "section.cards"
+        },
+        "label": "product cards"
+      }
+    }
+  ],
+  "compareLang": "en"
+}

@@ -1,0 +1,7 @@
+# 執行結果（使用者把設定檔放在 skill 裡試跑時）
+tablet-qa-runs/
+# 草稿與本機檔
+*.draft.md
+.DS_Store
+node_modules/
+*.bak*
