@@ -102,7 +102,7 @@ argument-hint: "[首次｜回歸｜完整] [頁面或範圍]"
 - **拍完修改前，先確認再修**：結束碼 0；每張圖打開，問題在圖裡看得到；看不到就調 `capture`／`steps`／`profiles` 重拍。定稿後 `steps`、`capture`、`hide`、`motion` 不再改（改了會被標「條件不同」，對比圖不能用）；`require` 可以之後補。
 - 使用者要直接修、還沒拍修改前時：先說明後果和補救方式，由使用者決定（不是禁止）。
 - **修完後**：
-  - `label` 改成「修改後 <commit／PR>」，跑 `shots.mjs … --cases=<要修的> --site=after --baseline=<修改前的 run> --run=<日期>-<項目>-after`。run 名每次都要新的；同名腳本會擋。
+  - `label` 改成「修改後 <commit／PR>」，跑 `shots.mjs … --cases=<要修的> --site=after --baseline=<修改前的 run> --run=<日期>-<項目>-after`。run 名每次都要新的：重用舊名會寫進舊資料夾；`--run` 和 `--baseline` 同名則腳本會擋。
   - 受影響的頁跑 sweep 回歸（見「回歸驗收」第 4 步）。
   - 看 `compare/<案例>-<profile>.png`，逐項對照 `expect`。`clip`、`fullPage` 沒有對比圖，附兩張原圖。`kind: interaction` 要操作、`kind: motion` 要錄影或實際捲動。
   - 單站時報告會有兩個**預期的**提示：「基準和本次用了同一個網址」（用 label、`runs.log` 時間和部署時間確認基準拍在修改前即可）、「基準沒有 before」／表格「找不到這一項」（基準本來就只有 after）。不是錯。

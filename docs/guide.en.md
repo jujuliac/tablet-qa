@@ -1,12 +1,12 @@
-[繁體中文](README.md)
+[← README](../README.md) · [繁體中文](guide.zh-Hant.md)
 
-# tablet-qa: a tablet layout QA skill for Claude Code
+# tablet-qa: iPad and responsive layout QA for Claude Code and Codex
 
-> The skill's rule documents and the reports it writes are in Traditional Chinese (繁體中文). Claude replies in the language you use, but the fixed wording inside the report files is Chinese. This README is the English version of `README.md`.
+> The skill's rule documents and the reports it writes are in Traditional Chinese (繁體中文). Claude replies in the language you use, but the fixed wording inside the report files is Chinese. This guide is the English version of [guide.zh-Hant.md](guide.zh-Hant.md).
 
 ## What it is
 
-A skill for [Claude Code](https://claude.com/claude-code). You ask Claude to check how a website looks at **tablet sizes (mainly iPad) and the neighboring responsive breakpoints**:
+An Agent Skill (SKILL.md) for [Claude Code](https://claude.com/claude-code) and [Codex](https://github.com/openai/codex), with standalone Node.js + Playwright scripts. You ask the AI to check how a website looks at **tablet sizes (mainly iPad) and the neighboring responsive breakpoints**:
 
 - Broken layout: horizontal overflow, clipped text, scroll areas that don't show there is more content, fixed bars that take too much height
 - Touch usability: tap targets smaller than 44px, adjacent buttons that overlap, features that only work on hover
@@ -27,7 +27,7 @@ Not for: replacing real-device testing, automatically judging whether something 
 
 | Item | Notes |
 |---|---|
-| Claude Code | Loads the skill |
+| Claude Code or Codex | Loads the skill (Codex: install to `~/.agents/skills/tablet-qa`; Chrome cannot start inside the Codex sandbox, so let it run the scripts outside it) |
 | Node.js 20 or later | The scripts are plain ESM with no other npm dependencies |
 | Playwright | Installed in **the project you want to test**: `npm i -D playwright` (the scripts load it from `playwrightFrom` in the config file, or by searching upward for `node_modules`). Tested with: Playwright 1.64.1, Google Chrome 158, Node 24, macOS (Apple Silicon) |
 | Browser | Uses Google Chrome by default. **Only if Chrome is not found does it fall back to Playwright's bundled Chromium** (first run `npx playwright install chromium` in your project folder; this downloads a test browser and does not change your website). The top-level `browser` field in the config file can pick one: `"auto"` (default), `"chrome"`, `"bundled"` (bundled Chromium), `"msedge"` (not tested so far). Set `"engine": "webkit"` on a profile to use WebKit (`npx playwright install webkit`). Building the before/after comparison images needs a Chromium-based browser. The fixed text drawn on those comparison images is Chinese by default; set the top-level `compareLang: "en"` to switch it to English (your own labels and notes are not translated). The report records the browser actually used, the Playwright version, and the operating system |
@@ -42,7 +42,7 @@ git clone https://github.com/jujuliac/tablet-qa.git ~/.claude/skills/tablet-qa
 
 Or put it inside a project: `<project>/.claude/skills/tablet-qa/` (only that project uses it).
 
-After installing, type `/tablet-qa` in Claude Code, or just say "run an iPad layout check".
+After installing, type `/tablet-qa` in Claude Code (in Codex, start with "Use the tablet-qa skill to…"; install it to `~/.agents/skills/tablet-qa` instead), or just say "run an iPad layout check".
 
 There is currently no plugin version.
 
@@ -56,7 +56,7 @@ Tell Claude which kind and which pages. If you are not specific, Claude picks on
 |---|---|---|---|
 | **First check** (首次檢查) | The first tablet QA for a project; no config file yet | "/tablet-qa first check, look at the home page and the product page" | A few minutes for a small scope; Claude first drafts a config file for you to confirm |
 | **Regression check** (回歸驗收, default) | After a fix, to confirm it is fixed and nothing else broke | "/tablet-qa regression, PR #12 changed the header" | Usually 1–5 minutes when 1–3 pages changed |
-| **Full check** (完整驗收) | Before handing over to a client, or after changing breakpoints or site-wide styles | "/tablet-qa full" | 30 minutes or more; run it in the background |
+| **Full check** (完整驗收) | Before handing over to a client, or after changing breakpoints or site-wide styles | "/tablet-qa full" | 30 minutes or more; run it in a terminal tab |
 
 Flow of the first check: **list the issues → you decide on each (fix / leave as is / to be confirmed) → once you decide to fix and authorize the change, take the "before" shots first → fix → take the "after" shots → you accept → register the baseline**. The skill only does the checking; checking does not mean permission to change code or deploy. Items you decide to leave as is are written into the config file and are not raised again.
 
@@ -86,11 +86,11 @@ Exit codes: 0 all succeeded; 1 there were failures (1 takes priority when there 
 
 ## Optional: reminder for background measurement (Stop hook)
 
-When a measurement runs as a Claude background task, Claude may finish its reply and forget it is still running. With the Stop hook installed, it reminds Claude at that moment to tell you "still running, a few more minutes". It is only a reminder and cannot stop you from closing the conversation; for measurements longer than 10 minutes, run them in a terminal tab instead. For installation, see "Stop hook（選用）" in `references/執行規格.md`.
+When a measurement runs as a Claude background task, Claude may finish its reply and forget it is still running. With the Stop hook installed, it reminds Claude at that moment to tell you "still running, a few more minutes". It is only a reminder and cannot stop you from closing the conversation; for measurements longer than 10 minutes, run them in a terminal tab instead. For installation, see "Stop hook（選用）" in [references/執行規格.md](../references/執行規格.md).
 
 ## Optional: notification when finished (--notify)
 
-Add `--notify` to shots or sweep (or set `"notify": true` in the config file) to get a system notification when a run finishes or is interrupted. The notification only says "measured, waiting to be reviewed"; it does not mean passed. On macOS you may need to allow it the first time. For details, see `--notify` in `references/執行規格.md`.
+Add `--notify` to shots or sweep (or set `"notify": true` in the config file) to get a system notification when a run finishes or is interrupted. The notification only says "measured, waiting to be reviewed"; it does not mean passed. On macOS you may need to allow it the first time. For details, see `--notify` in [references/執行規格.md](../references/執行規格.md).
 
 ## Minimal config file
 
@@ -127,11 +127,11 @@ Put it in your project (for example `qa/tablet/tablet-qa.json`), **not back insi
 
 - `sweep` needs `sites`, `profiles` and `pages`; `breakpoints` is optional, and without it breakpoints are not measured. `shots` also needs `cases`.
 - Results are written by default to `tablet-qa-runs/` next to the config file. Add it to the project's `.gitignore`: it holds full-page screenshots, URLs, and a copy of the config file (including test data typed with `fill`). The scripts only connect to the URLs in the config file and send no data anywhere else.
-- For all fields (`acceptedExceptions`, `steps` actions, `require`, `versionUrl`, the `before` site, and so on), see `references/執行規格.md`.
+- For all fields (`acceptedExceptions`, `steps` actions, `require`, `versionUrl`, the `before` site, and so on), see [references/執行規格.md](../references/執行規格.md).
 
 ## Try the demo page
 
-`examples/demo-site/` is a fake shop page with a before version and an after version, which you can use for a trial run. For the steps and commands, see `examples/demo-site/README.md`.
+`examples/demo-site/` is a fake shop page with a before version and an after version, which you can use for a trial run. For the steps and commands, see [examples/demo-site/README.md](../examples/demo-site/README.md).
 
 ## What the output looks like
 
@@ -150,7 +150,7 @@ Each run writes one folder, `<out>/<run name>/`:
 
 ### Before/after comparison image
 
-![Before/after comparison example](docs/compare-example.png)
+![Before/after comparison example](compare-example-en.png)
 
 The example image was made from the demo page in `examples/demo-site/`: at tablet width, the product cards change from a single column to three columns. The left side is before, the right side is after, and the frames mark the block being compared.
 
@@ -172,7 +172,7 @@ The example image was made from the demo page in `examples/demo-site/`: at table
 - The finished notification (`--notify`) only works on macOS and Linux (`notify-send`); Windows gets no notification.
 - When Playwright is not under a standard `node_modules/` folder, the lookup uses a Node internal API (`Module._initPaths`) that may stop working in later Node versions. Point `playwrightFrom` at a project folder that contains `node_modules/`.
 - The design judgment rules (`references/判斷/`) come almost entirely from **one** multilingual content website and have not been validated on a second project; check the preferences and cases against your own project.
-- The skill's rule documents and reports are in Traditional Chinese; this README has an English version.
+- The skill's rule documents and reports are in Traditional Chinese; the README and this guide are available in English.
 
 ## Tests
 
