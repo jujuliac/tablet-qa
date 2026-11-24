@@ -110,6 +110,10 @@ Want to try it first? Say: "Do a test run of tablet-qa on `examples/demo-site`" 
 
 Config, script options, output files, optional features: [docs/guide.en.md](docs/guide.en.md)
 
+### Background
+
+I wrote about the client project behind this skill and the layout issues it found: [tablet-qa: an open-source skill for checking iPad layouts](https://dev.to/jujuliac/tablet-qa-an-open-source-skill-for-checking-ipad-layouts-5ce) (dev.to).
+
 ---
 
 <a name="zh-hant"></a>
@@ -202,6 +206,10 @@ tablet-qa 是給 Claude Code、Codex 用的 Agent Skill（SKILL.md），檢查�
 ### 完整說明
 
 設定檔、腳本參數、輸出檔案、選用功能：[docs/guide.zh-Hant.md](docs/guide.zh-Hant.md)
+
+### 開發背景
+
+這個 skill 來自一個客戶專案，整理的過程和找到的版面問題都寫在這篇文章裡：[tablet-qa：用來檢查網站 iPad 版面的開源 skill](https://medium.com/@juliachen25/tablet-qa-ipad-layout-check-e36e67d1f6dd)（Medium）。
 
 ---
 
