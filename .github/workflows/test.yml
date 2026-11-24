@@ -81,3 +81,29 @@ jobs:
           name: demo-${{ matrix.os }}-${{ matrix.browser }}
           path: examples/demo-site/tablet-qa-runs/
           if-no-files-found: warn
+
+  # Draws the README "tests" badge (same style as docs/badge-*.svg) and keeps it on the "badges" branch.
+  badge:
+    needs: [unit, demo]
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Publish badge
+        env:
+          RESULT: ${{ needs.unit.result == 'success' && needs.demo.result == 'success' && 'passing' || 'failing' }}
+        run: |
+          mkdir -p /tmp/badge
+          node .github/make-badge.mjs "$RESULT" > /tmp/badge/badge-tests.svg
+          cd /tmp/badge
+          git init -q -b badges
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add badge-tests.svg
+          git commit -q -m "tests: $RESULT"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" badges

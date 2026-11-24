@@ -9,9 +9,12 @@
 
 <p align="center">
   <a href="#english">English</a> · <a href="#zh-hant">繁體中文</a>
-  &nbsp;&nbsp;
-  <a href="LICENSE"><img src="docs/badge-license.svg" alt="License: MIT" align="center"></a>
-  <img src="docs/badge-node.svg" alt="Node 20+" align="center">
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="docs/badge-license.svg" alt="License: MIT"></a>
+  <img src="docs/badge-node.svg" alt="Node 20+">
+  <a href="https://github.com/jujuliac/tablet-qa/actions/workflows/test.yml"><img src="https://raw.githubusercontent.com/jujuliac/tablet-qa/badges/badge-tests.svg" alt="Tests"></a>
 </p>
 
 <a name="english"></a>
@@ -56,6 +59,7 @@ You need:
 - Node.js 20+
 - Playwright in the site project you test: `npm i -D playwright`
 - Google Chrome. No Chrome? Run `npx playwright install chromium` and it uses Playwright's bundled Chromium instead
+- On Linux, a CJK font such as Noto Sans CJK. Without one, Chinese text renders as boxes and measurements can be wrong without any error reported
 - A URL to test: a local dev server or a preview site
 
 Steps:
@@ -87,6 +91,8 @@ You can also just describe what you want checked in plain English.
 
 Want to try it first? Say: "Do a test run of tablet-qa on `examples/demo-site`" ([demo notes](examples/demo-site/)).
 
+**Test coverage.** GitHub Actions tests pass on Linux, Windows and macOS. They cover unit tests and check the demo page against expected findings in Google Chrome, Playwright's bundled Chromium and Playwright WebKit. The demo page was also checked in iPadOS Safari in the Xcode simulator: the measurements matched, except for viewport height because of Safari's toolbars.
+
 **Using Codex?** Chrome can't start inside Codex's sandbox, so let Codex run the scripts outside it (approve when it asks, or use full access).
 
 **No AI tool?** The two scripts are plain Node + Playwright. You can run them yourself and still get the reports and comparison images; you just write the config file by hand (commands in the full guide). AI tools other than Claude Code and Codex are untested.
@@ -96,8 +102,8 @@ Want to try it first? Say: "Do a test run of tablet-qa on `examples/demo-site`" 
 - Tablet sizes are simulated in a desktop browser. That is not the same as Safari on a real iPad, so check on a real device before launch.
 - Visual quality still needs human review.
 - Tap targets are only measured at touch sizes; a laptop size like 1366 × 768 skips that check.
-- Tested on macOS with Chrome only, mainly in Claude Code; Windows and Linux are untested.
-- The skill's rules and reports are in Traditional Chinese; the AI replies in your language.
+- I've only used it on real sites on macOS, mostly in Claude Code.
+- The skill's rules and report files are in Traditional Chinese. Before-and-after images default to Chinese labels, with English available via `compareLang: "en"`. The AI presents selected findings in your language.
 - Results go to `tablet-qa-runs/` in your project. It holds screenshots and URLs, so add it to `.gitignore`.
 
 ### Full guide
@@ -148,6 +154,7 @@ tablet-qa 是給 Claude Code、Codex 用的 Agent Skill（SKILL.md），檢查�
 - Node.js 20 以上
 - 要測的網站專案裡裝好 Playwright：`npm i -D playwright`
 - Google Chrome。沒有的話，先執行 `npx playwright install chromium`，會改用 Playwright 內建的 Chromium
+- Linux 上要裝 Noto Sans CJK 等中日韓字型。缺少字型時，中文字會顯示成方框，量測結果可能出錯，也不會有錯誤提示
 - 一個打得開的網址：本機開著的網站，或預覽站都可以
 
 步驟：
@@ -177,6 +184,8 @@ tablet-qa 是給 Claude Code、Codex 用的 Agent Skill（SKILL.md），檢查�
 
 想先試試看？直接說：「用 tablet-qa 的 `examples/demo-site` 試跑一次」（[示範頁說明](examples/demo-site/)）。
 
+**測試範圍：** GitHub Actions 測試已在 Linux、Windows 和 macOS 上通過，包含單元測試，以及用 Google Chrome、Playwright 內建的 Chromium 和 Playwright WebKit 檢查示範頁，確認結果符合預期。示範頁也在 Xcode 模擬器的 iPadOS Safari 中檢查過，量測數值一致，只有視窗高度因 Safari 工具列而不同。
+
 **用 Codex 的話：** Codex 的沙盒裡開不了 Chrome，要讓它在沙盒外跑腳本（它詢問時同意，或改用完整權限）。
 
 **不用 AI 工具也能用嗎？** 可以。兩支腳本是一般的 Node＋Playwright 程式，自己在終端機跑也會產出報告和對比圖，只是設定檔要自己寫（指令見完整說明）。Claude Code、Codex 以外的 AI 工具還沒測過。
@@ -186,8 +195,8 @@ tablet-qa 是給 Claude Code、Codex 用的 Agent Skill（SKILL.md），檢查�
 - 用桌機瀏覽器模擬平板尺寸，不等於 iPad 實機的 Safari，上線前仍建議用實機看一次。
 - 版面好不好看，仍需要人來判斷。
 - 點擊範圍只在觸控尺寸下量；1366 × 768 這類筆電尺寸不量這一項。
-- 只在 macOS＋Chrome 測過，主要在 Claude Code 裡用；Windows、Linux 還沒測。
-- skill 的規則和報告是繁體中文；AI 會用你的語言回覆。
+- 目前只在 macOS 上用來檢查過實際網站，主要搭配 Claude Code。
+- skill 的規則和報告檔是繁體中文。前後對照圖的標籤預設為中文，可透過 `compareLang: "en"` 改成英文。AI 會用你的語言整理重點。
 - 結果會存在你專案的 `tablet-qa-runs/`，裡面有截圖和網址，記得加進 `.gitignore`。
 
 ### 完整說明

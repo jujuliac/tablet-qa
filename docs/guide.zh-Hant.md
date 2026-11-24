@@ -163,7 +163,7 @@ shots、sweep 加 `--notify`（或設定檔寫 `"notify": true`），跑完或�
 - 量測是離散測點：每組線索的寬度是「量到問題的寬度」，不代表中間寬度都驗過。
 - 動態效果（視差、轉場、進場動畫）靜態截圖證明不了，要錄影或實際捲動看。
 - 操作步驟（點擊、填表）可能在網站上產生資料，請只用測試環境和測試資料。
-- 目前只在 macOS 用過；Windows、Linux 沒實測。Windows 的命令範例（`~`、`\` 續行）沒驗過，請寫成一行、把 `~` 換成完整路徑。Stop hook 的範例是 macOS／Linux shell 寫法，Windows 要換成實際路徑。
+- 目前只在 macOS 上用來檢查過實際網站。CI 已在 Linux、Windows 和 macOS 上通過，涵蓋單元測試和示範頁檢查。示範頁使用 Google Chrome、Playwright 內建的 Chromium 和 Playwright WebKit 檢查。Windows 上的示範頁測試步驟在 Git Bash 中執行。Windows 的命令範例（`~`、`\` 續行）沒驗過，請寫成一行、把 `~` 換成完整路徑。Stop hook 的範例是 macOS／Linux shell 寫法，Windows 要換成實際路徑。
 - 前後對照盡量用同一台機器、同一個瀏覽器。內建 Chromium 不能播 H.264（mp4）影片，有影片的頁面可能跟 Chrome 不一樣；跨作業系統字型不同，行數和寬度也會變。shots 比對基準時瀏覽器不同會警告（只警告，不阻擋）。
 - 跑完通知（`--notify`）只支援 macOS 和 Linux（`notify-send`）；Windows 不會通知。
 - 找 Playwright 時，套件不在標準 `node_modules/` 底下會用到 Node 內部 API（`Module._initPaths`），之後的 Node 版本可能失效；建議讓 `playwrightFrom` 指到含 `node_modules/` 的專案資料夾。
