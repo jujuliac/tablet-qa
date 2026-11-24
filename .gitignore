@@ -5,3 +5,5 @@ tablet-qa-runs/
 .DS_Store
 node_modules/
 *.bak*
+# CI 產生的設定檔
+examples/demo-site/ci-*.json

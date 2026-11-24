@@ -20,7 +20,8 @@ assert.match(badName("a/b"), /不能含/);
   assert.equal(rerunCommand(["C:\\Users\\a b\\shots.mjs", "c.json"], "win32"), 'node "C:\\Users\\a b\\shots.mjs" c.json');
   assert.equal(quoteArg("it's here", "darwin"), `'it'\\''s here'`);
   assert.equal(quoteArg("--cases=首頁,關於"), "--cases=首頁,關於");
-  assert.equal(quoteArg(""), "''");
+  assert.equal(quoteArg("", "darwin"), "''");
+  assert.equal(quoteArg("", "win32"), '""');
   // 單引號的結果交給真的 shell 還原
   if (process.platform !== "win32") {
     const { spawnSync } = await import("node:child_process");

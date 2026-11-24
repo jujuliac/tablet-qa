@@ -1,0 +1,51 @@
+{
+  "_note": "Expected sweep findings for examples/demo-site (before site), per width: 'check selector'. Generated from a macOS Chrome run.",
+  "sweep": {
+    "743": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "overflow body > main > div.promo",
+      "overflow html",
+      "tap body > header > button.search"
+    ],
+    "744": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "overflow body > main > div.promo",
+      "overflow html",
+      "tap body > header > button.search"
+    ],
+    "745": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "overflow body > main > div.promo",
+      "overflow html",
+      "tap body > header > button.search"
+    ],
+    "810": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "overflow body > main > div.promo",
+      "overflow html",
+      "tap body > header > button.search"
+    ],
+    "820": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "overflow body > main > div.promo",
+      "overflow html",
+      "tap body > header > button.search"
+    ],
+    "1023": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "tap body > header > button.search"
+    ],
+    "1024": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "tap body > header > button.search"
+    ],
+    "1025": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)",
+      "tap body > header > button.search"
+    ],
+    "1440": [
+      "clipped body > main > div.promo > span.tag:nth-of-type(1)"
+    ]
+  },
+  "shotsOk": 4
+}
