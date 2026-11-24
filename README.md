@@ -9,6 +9,9 @@
 
 <p align="center">
   <a href="#english">English</a> · <a href="#zh-hant">繁體中文</a>
+  &nbsp;&nbsp;
+  <a href="LICENSE"><img src="docs/badge-license.svg" alt="License: MIT" align="center"></a>
+  <img src="docs/badge-node.svg" alt="Node 20+" align="center">
 </p>
 
 <a name="english"></a>
